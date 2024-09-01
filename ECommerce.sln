@@ -2,11 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "MyWebAPI\Presentation.csproj", "{81A97590-5515-45F8-814B-4758EB1DFFEE}"
-	ProjectSection(ProjectDependencies) = postProject
-		{049A9272-C0FB-426A-A0C3-69C2325B2E76} = {049A9272-C0FB-426A-A0C3-69C2325B2E76}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{307E9D4D-753C-4D42-AA75-98D9BA9ABA91}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runtime", "Runtime\Runtime.csproj", "{049A9272-C0FB-426A-A0C3-69C2325B2E76}"
@@ -16,16 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runtime", "Runtime\Runtime.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessDomain", "BusinessDomain\BusinessDomain.csproj", "{65299830-13A1-4D41-8A16-8B1C465E52E0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{5EF09570-AF4F-4E2E-8E4B-3BD42126ABAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{81A97590-5515-45F8-814B-4758EB1DFFEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81A97590-5515-45F8-814B-4758EB1DFFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81A97590-5515-45F8-814B-4758EB1DFFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81A97590-5515-45F8-814B-4758EB1DFFEE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{307E9D4D-753C-4D42-AA75-98D9BA9ABA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{307E9D4D-753C-4D42-AA75-98D9BA9ABA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{307E9D4D-753C-4D42-AA75-98D9BA9ABA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,6 +31,10 @@ Global
 		{65299830-13A1-4D41-8A16-8B1C465E52E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65299830-13A1-4D41-8A16-8B1C465E52E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65299830-13A1-4D41-8A16-8B1C465E52E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EF09570-AF4F-4E2E-8E4B-3BD42126ABAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF09570-AF4F-4E2E-8E4B-3BD42126ABAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF09570-AF4F-4E2E-8E4B-3BD42126ABAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF09570-AF4F-4E2E-8E4B-3BD42126ABAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -36,7 +36,6 @@ namespace Presentation.Controllers
             BaseResponse response;
             if (!ModelState.IsValid || !CustomerVM.Email.IsEmail() || !CustomerVM.Password.IsStrong())
             {
-                // TODO: Check if this is the correct way to handle the error
                 var errorsDict = ModelState.ToErrorDictionary();
                 if (!errorsDict.ContainsKey("Email") && !CustomerVM.Email.IsEmail())
                 {
