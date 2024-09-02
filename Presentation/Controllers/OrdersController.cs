@@ -93,7 +93,7 @@ namespace Presentation.Controllers
             }
             catch (ProductNotFoundException)
             {
-                // TODO: Verify this exception
+                // to: Verify this exception
                 response = new ErrorResponse
                 {
                     StatusCode = 400,
@@ -102,6 +102,18 @@ namespace Presentation.Controllers
                 };
                 return BadRequest(response);
             }
+
+            catch (InsufficientStockException)
+            {
+                response = new ErrorResponse
+                {
+                    StatusCode = 400,
+                    Message = "InValid Data",
+                    Errors = new Dictionary<string, string> { { "Quantity", "Insufficient Stock" } }
+                };
+                return BadRequest(response);
+            }
+
             catch (Exception e) when (e is NoSavedChangesException || e is DbException || e is DbUpdateException)
             {
                 response = new BaseResponse

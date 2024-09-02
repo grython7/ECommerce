@@ -26,7 +26,7 @@ namespace Presentation.ViewModels
         public double Amount { get; set; }
 
         public String Type { get; set; }
-        //public int? Quantity { get; set; }
+        public int? Quantity { get; set; }
         public String? Status { get; set; }
     }
 }

@@ -17,6 +17,8 @@ namespace BusinessDomain.Interfaces
         public Task<ProductDTO> GetProductByIdAsync(Guid id);
         public Task<ProductDTO> AddProductAsync(ProductDTO productIn);
         public Task<ProductDTO> UpdateProductAsync(Guid id, ProductDTO productIn);
+        public Task UpdateProductStockAsync(Product product, int quantity);
+
         public Task SoftDeleteAsync(Guid id);
     }
 }

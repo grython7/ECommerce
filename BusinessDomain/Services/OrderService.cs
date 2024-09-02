@@ -76,6 +76,10 @@ namespace BusinessDomain.Services
                 Product product = await _productRepository.GetByIdAsync(oi.ProductId);
                 if (product is null)
                     throw new ProductNotFoundException();
+
+                if (!(product.Quantity is null))
+                    await _productService.UpdateProductStockAsync(product, oi.Quantity);
+
                 oi.Cost = product.Amount * oi.Quantity;
                 order.Amount += oi.Cost;
             }

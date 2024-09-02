@@ -65,7 +65,9 @@ namespace BusinessDomain.Services
         {
             Product product = productIn.Adapt<Product>();
 
-            //UpdateProductStatus(product);
+            if (!(product.Quantity is null))
+                UpdateProductStatus(product);
+            
             await _productRepository.AddAsync(product);
             if (await _unitOfWork.SaveAsync() == 0)
                 throw new NoSavedChangesException();
@@ -80,7 +82,6 @@ namespace BusinessDomain.Services
                 throw new ProductNotFoundException();
             }
 
-            //// TODO: try to configure and use mapper instead
             //thisProduct.Name = productIn.Name;
             //thisProduct.Description = productIn.Description;
             //thisProduct.Amount = productIn.Amount;
@@ -99,7 +100,9 @@ namespace BusinessDomain.Services
 
 
             thisProduct.UpdatedOn = DateTime.Now;
-            //UpdateProductStatus(thisProduct);
+
+            if (!(thisProduct.Quantity is null))
+                UpdateProductStatus(thisProduct);
 
             _productRepository.Update(thisProduct);
             if (await _unitOfWork.SaveAsync() == 0)
@@ -108,23 +111,36 @@ namespace BusinessDomain.Services
             return thisProduct.Adapt<ProductDTO>();
         }
 
-        //private void UpdateProductStatus(Product product)
-        //{
-        //    string status;
-        //    switch (product.Quantity)
-        //    {
-        //        case 0:
-        //            status = "Out of stock";
-        //            break;
-        //        case <= 3:
-        //            status = "Limited stock";
-        //            break;
-        //        default:
-        //            status = "In stock";
-        //            break;
-        //    }
-        //    product.Status = status;
-        //}
+        public async Task UpdateProductStockAsync(Product product, int quantity)
+        {
+            if (product.Quantity < quantity)
+                throw new InsufficientStockException();
+            product.Quantity -= quantity;
+            UpdateProductStatus(product);
+
+            _productRepository.Update(product);
+            if (await _unitOfWork.SaveAsync() == 0)
+                throw new NoSavedChangesException();
+
+        }
+
+        private void UpdateProductStatus(Product product)
+        {
+            string status;
+            switch (product.Quantity)
+            {
+                case 0:
+                    status = "Out of stock";
+                    break;
+                case <= 3:
+                    status = "Limited stock";
+                    break;
+                default:
+                    status = "In stock";
+                    break;
+            }
+            product.Status = status;
+        }
 
         public async Task SoftDeleteAsync(Guid id)
         {
