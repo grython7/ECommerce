@@ -120,8 +120,8 @@ namespace BusinessDomain.Services
             UpdateProductStatus(product);
 
             _productRepository.Update(product);
-            if (await _unitOfWork.SaveAsync() == 0)
-                throw new NoSavedChangesException();
+            //if (await _unitOfWork.SaveAsync() == 0)
+            //    throw new NoSavedChangesException();
         }
 
         private void UpdateProductStatus(Product product)
