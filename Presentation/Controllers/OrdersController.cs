@@ -7,7 +7,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Presentation.Helpers;
 using Presentation.Responses;
-using Presentation.ViewModels;
+using Presentation.ViewModels.Order;
 using System.Data.Common;
 
 namespace Presentation.Controllers
@@ -32,8 +32,8 @@ namespace Presentation.Controllers
             try
             {
                 List<OrderDTO> ordersDTO = await _orderService.GetOrdersByUserIdAsync(CustomerId);
-                List<OrderViewModel> data = ordersDTO.Adapt<List<OrderViewModel>>();
-                response = new SuccessResponse<List<OrderViewModel>>
+                List<OrderVMResponse> data = ordersDTO.Adapt<List<OrderVMResponse>>();
+                response = new SuccessResponse<List<OrderVMResponse>>
                 {
                     StatusCode = 200,
                     Message = "Orders Retrieved Successfully",
@@ -64,7 +64,7 @@ namespace Presentation.Controllers
 
         // POST: api/orders
         [HttpPost]
-        public async Task<IActionResult> AddOrder([FromBody] OrderViewModel OrderVM)
+        public async Task<IActionResult> AddOrder([FromBody] OrderVMRequest OrderVM)
         {
             BaseResponse response;
             if (!ModelState.IsValid)
@@ -82,8 +82,8 @@ namespace Presentation.Controllers
             try
             {
                 OrderDTO orderDTO = await _orderService.PlaceOrderAsync(OrderVM.Adapt<OrderDTO>());
-                OrderViewModel data = orderDTO.Adapt<OrderViewModel>();
-                response = new SuccessResponse<OrderViewModel>
+                OrderVMResponse data = orderDTO.Adapt<OrderVMResponse>();
+                response = new SuccessResponse<OrderVMResponse>
                 {
                     StatusCode = 200,
                     Message = "Order Added Successfully",

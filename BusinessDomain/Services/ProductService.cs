@@ -115,6 +115,7 @@ namespace BusinessDomain.Services
         {
             if (product.Quantity < quantity)
                 throw new InsufficientStockException($"Insufficient stock for {product.Name}");
+
             product.Quantity -= quantity;
             UpdateProductStatus(product);
 

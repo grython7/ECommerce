@@ -5,18 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Presentation.ViewModels
+namespace Presentation.ViewModels.OrderItem
 {
-    public class OrderItemViewModel
+    public class OrderItemVMResponse
     {
         // Output only
         public Guid Id { get; set; }
         public double Cost { get; set; }
-
-        // Input & Output
-        [Required]
-        public Guid ProductId { get; set; }
-        [Required]
-        public int Quantity { get; set; }
     }
 }

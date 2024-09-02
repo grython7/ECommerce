@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Presentation.Helpers;
 using Presentation.Responses;
-using Presentation.ViewModels;
+using Presentation.ViewModels.User;
 using System.Data.Common;
 using System.Runtime.InteropServices;
 
@@ -31,7 +31,7 @@ namespace Presentation.Controllers
 
         // POST: api/users/register
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserViewModel CustomerVM)
+        public async Task<IActionResult> Register([FromBody] UserVMRequest CustomerVM)
         {
             BaseResponse response;
             if (!ModelState.IsValid || !CustomerVM.Email.IsEmail() || !CustomerVM.Password.IsStrong())
@@ -56,8 +56,8 @@ namespace Presentation.Controllers
             try
             {
                 UserDTO userDTO = await _userService.RegisterUserAsync(CustomerVM.Adapt<UserDTO>());
-                UserViewModel data = userDTO.Adapt<UserViewModel>();
-                response = new SuccessResponse<UserViewModel>
+                UserVMResponse data = userDTO.Adapt<UserVMResponse>();
+                response = new SuccessResponse<UserVMResponse>
                 {
                     StatusCode = 200,
                     Message = "Customer Added Successfully",
@@ -98,8 +98,8 @@ namespace Presentation.Controllers
             try
             {
                 UserDTO userDTO = await _userService.UserLoginAsync(Email, Password);
-                UserViewModel data = userDTO.Adapt<UserViewModel>();
-                response = new SuccessResponse<UserViewModel>
+                UserVMResponse data = userDTO.Adapt<UserVMResponse>();
+                response = new SuccessResponse<UserVMResponse>
                 {
                     StatusCode = 200,
                     Message = "Login Successfully",

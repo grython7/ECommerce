@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Presentation.Helpers;
 using Presentation.Responses;
 using Presentation.ViewModels;
+using Presentation.ViewModels.Product;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -41,8 +42,8 @@ namespace Presentation.Controllers
             try
             {
                 List<ProductDTO> productsDTO = await _productService.GetAllProductsAsync(CustomerId);
-                List<ProductViewModel> data = productsDTO.Adapt<List<ProductViewModel>>();
-                response = new SuccessResponse<List<ProductViewModel>>
+                List<ProductVMResponse> data = productsDTO.Adapt<List<ProductVMResponse>>();
+                response = new SuccessResponse<List<ProductVMResponse>>
                 {
                     StatusCode = 200,
                     Message = "Products Retrieved Successfully",
@@ -89,8 +90,8 @@ namespace Presentation.Controllers
                 }
                 else
                 {
-                    ProductViewModel data = productDTO.Adapt<ProductViewModel>();
-                    response = new SuccessResponse<ProductViewModel>
+                    ProductVMResponse data = productDTO.Adapt<ProductVMResponse>();
+                    response = new SuccessResponse<ProductVMResponse>
                     {
                         StatusCode = 200,
                         Message = "Product Retrieved Successfully",
@@ -112,7 +113,7 @@ namespace Presentation.Controllers
 
         // POST: api/products
         [HttpPost]
-        public async Task<IActionResult> AddProduct([FromBody] ProductViewModel ProductVm)
+        public async Task<IActionResult> AddProduct([FromBody] ProductVMRequest ProductVm)
         {
             BaseResponse response;
             if (!ModelState.IsValid)
@@ -129,8 +130,8 @@ namespace Presentation.Controllers
             try
             {
                 ProductDTO productDTO = await _productService.AddProductAsync(ProductVm.Adapt<ProductDTO>());
-                ProductViewModel data = productDTO.Adapt<ProductViewModel>();
-                response = new SuccessResponse<ProductViewModel>
+                ProductVMResponse data = productDTO.Adapt<ProductVMResponse>();
+                response = new SuccessResponse<ProductVMResponse>
                 {
                     StatusCode = 200,
                     Message = "Product Added Successfully",
@@ -151,7 +152,7 @@ namespace Presentation.Controllers
 
         // PUT: api/products/update/1
         [HttpPut("update/{Id}")]
-        public async Task<IActionResult> UpdateProduct(Guid Id, [FromBody] ProductViewModel ProductVm)
+        public async Task<IActionResult> UpdateProduct(Guid Id, [FromBody] ProductVMRequest ProductVm)
         {
             BaseResponse response;
             if (!ModelState.IsValid)
@@ -168,8 +169,8 @@ namespace Presentation.Controllers
             try
             {
                 ProductDTO productDTO = await _productService.UpdateProductAsync(Id, ProductVm.Adapt<ProductDTO>());
-                ProductViewModel data = productDTO.Adapt<ProductViewModel>();
-                response = new SuccessResponse<ProductViewModel>
+                ProductVMResponse data = productDTO.Adapt<ProductVMResponse>();
+                response = new SuccessResponse<ProductVMResponse>
                 {
                     StatusCode = 200,
                     Message = "Product Updated Successfully",
@@ -177,7 +178,6 @@ namespace Presentation.Controllers
                 };
                 return Ok(response);
             }
-            // TODO: Verify the response for updating a non-existing product
             catch (ProductNotFoundException e)
             {
                 response = new BaseResponse
