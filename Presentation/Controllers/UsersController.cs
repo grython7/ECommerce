@@ -37,13 +37,17 @@ namespace Presentation.Controllers
             if (!ModelState.IsValid || !CustomerVM.Email.IsEmail() || !CustomerVM.Password.IsStrong())
             {
                 var errorsDict = ModelState.ToErrorDictionary();
-                if (!errorsDict.ContainsKey("Email") && !CustomerVM.Email.IsEmail())
+                if (!(CustomerVM is null))
                 {
-                    errorsDict.Add("Email", "Invalid Email Format");
-                }
-                if (!errorsDict.ContainsKey("Password") && !CustomerVM.Password.IsStrong())
-                {
-                    errorsDict.Add("Password", "Weak Password");
+                    if (!errorsDict.ContainsKey("Email") && !CustomerVM.Email.IsEmail())
+                    {
+                        errorsDict.Add("Email", "Invalid Email Format");
+                    }
+                    if (!errorsDict.ContainsKey("Password") && !CustomerVM.Password.IsStrong())
+                    {
+                        errorsDict.Add("Password", "Weak Password");
+                    }
+
                 }
                 response = new ErrorResponse
                 {
