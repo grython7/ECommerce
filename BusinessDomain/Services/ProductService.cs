@@ -114,14 +114,13 @@ namespace BusinessDomain.Services
         public async Task UpdateProductStockAsync(Product product, int quantity)
         {
             if (product.Quantity < quantity)
-                throw new InsufficientStockException();
+                throw new InsufficientStockException($"Insufficient stock for {product.Name}");
             product.Quantity -= quantity;
             UpdateProductStatus(product);
 
             _productRepository.Update(product);
             if (await _unitOfWork.SaveAsync() == 0)
                 throw new NoSavedChangesException();
-
         }
 
         private void UpdateProductStatus(Product product)

@@ -103,13 +103,13 @@ namespace Presentation.Controllers
                 return BadRequest(response);
             }
 
-            catch (InsufficientStockException)
+            catch (InsufficientStockException e)
             {
                 response = new ErrorResponse
                 {
                     StatusCode = 400,
                     Message = "InValid Data",
-                    Errors = new Dictionary<string, string> { { "Quantity", "Insufficient Stock" } }
+                    Errors = new Dictionary<string, string> { { "Quantity",  e.Message} }
                 };
                 return BadRequest(response);
             }
