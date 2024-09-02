@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20240902171843_addedDataSeeding")]
+    partial class addedDataSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,15 +209,15 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3ab4b46a-8d10-41ce-d001-08dccb73f215"),
+                            Id = new Guid("19559900-08d1-460a-b46b-08dcca12a94e"),
                             Address = "123 bla bla st.",
                             CreatedOn = new DateTime(2024, 9, 1, 2, 14, 54, 0, DateTimeKind.Unspecified),
                             Email = "admin@ldc.com",
                             IsAdmin = true,
                             IsDeleted = false,
                             Name = "admin",
-                            PasswordHash = "Cvpqm17FCPsRjAdKdJTitnyNu2isY88GFVMfOLDiLKA=",
-                            PasswordSalt = "xLLO/PUZthdu0xjc/YNY1w==",
+                            PasswordHash = "wM+SX1pv7uMsQmr7V5oyfi4vqHDNPnkdWZ7Xe/xjp5U=",
+                            PasswordSalt = "6KkbPhZg4gD+NFCaEQDuew==",
                             Phone = "01234567890",
                             Status = "Active",
                             UpdatedOn = new DateTime(2024, 9, 1, 2, 14, 54, 0, DateTimeKind.Unspecified)

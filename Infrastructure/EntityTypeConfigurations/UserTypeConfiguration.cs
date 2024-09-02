@@ -13,6 +13,24 @@ namespace Infrastructure.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasData(
+                new User
+                {
+                    Id = new Guid("3ab4b46a-8d10-41ce-d001-08dccb73f215"),
+                    Name = "admin",
+                    Address = "123 bla bla st.",
+                    Phone = "01234567890",
+                    Email = "admin@ldc.com",
+                    PasswordSalt = "xLLO/PUZthdu0xjc/YNY1w==",
+                    PasswordHash = "Cvpqm17FCPsRjAdKdJTitnyNu2isY88GFVMfOLDiLKA=",
+                    Status = "Active",
+                    IsAdmin = true,
+                    CreatedOn = DateTime.Parse("01/09/2024 02:14:54"),
+                    UpdatedOn = DateTime.Parse("01/09/2024 02:14:54"),
+                    IsDeleted = false
+                }
+            );
+
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Id).HasColumnName("UserId");
 
